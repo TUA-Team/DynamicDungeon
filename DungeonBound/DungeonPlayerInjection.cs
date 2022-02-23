@@ -73,14 +73,26 @@ namespace DynamicDungeon.DungeonBound
                 return;
             }
 
-            var chunk = Main.LocalPlayer.GetCurrentChunk().GetModChunk<DungeonChunk.DungeonChunk>();
-            Rectangle roomBound = new Rectangle((int) (chunk.Chunk.Position.X * 16), (int) (chunk.Chunk.Position.Y * 16), chunk.width * 16, chunk.height * 16);
-
-            Vector2 vector = new Vector2(roomBound.X, roomBound.Y) - Main.GameViewMatrix.Translation;
-            Vector2 vector2 = new Vector2(roomBound.X + roomBound.Width - (float)Main.screenWidth / Main.GameViewMatrix.Zoom.X, roomBound.Y + roomBound.Height - (float)Main.screenHeight / Main.GameViewMatrix.Zoom.Y) - Main.GameViewMatrix.Translation;
+            
+            var chunk = Main.LocalPlayer.GetCurrentChunk();
+            
+            Vector2 playerChunk = chunk.Position;
+            
+            Rectangle roomBound = new Rectangle((int) playerChunk.X * 16, (int) playerChunk.Y * 16, 100 * 16, 75 * 16);
+            //DynamicDungeon.instance.Logger.Debug(roomBound);
+            //DynamicDungeon.instance.Logger.Debug($"Current dungeon room bound: {roomBound}");
+            
+            Vector2 vector = new Vector2(roomBound.X, roomBound.Y);
+            Vector2 vector2 = new Vector2(roomBound.X + roomBound.Width, roomBound.Y + roomBound.Height);
             vector = Utils.Round(vector);
             vector2 = Utils.Round(vector2);
-            Main.screenPosition = Vector2.Clamp(Main.screenPosition, vector, vector2);
+            vector2 *= -1f;
+            //DynamicDungeon.instance.Logger.Debug($"Current dungeon room top left : {vector}");
+            //DynamicDungeon.instance.Logger.Debug($"Current dungeon room bottom left : {vector2}");
+            //DynamicDungeon.instance.Logger.Debug($"Current player chunk position : {playerChunk}");
+            Main.screenPosition = roomBound.Center() - new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f);
+
         }
+        
     }
 }

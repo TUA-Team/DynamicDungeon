@@ -72,9 +72,9 @@ namespace DynamicDungeon.DungeonBase
 		}
 
 
-		internal override Rectangle Generate()
-		{
-			cleared = true;
+        internal override Rectangle Generate()
+        {
+            cleared = true;
 			Point point = new Point(roomBound.X, roomBound.Y);
 			for (int i = point.X; i < point.X + roomBound.Width; i++)
 			{
@@ -87,5 +87,10 @@ namespace DynamicDungeon.DungeonBase
 
 			return roomBound;
 		}
-	}
+
+        internal override void Activate()
+        {
+            
+        }
+    }
 }

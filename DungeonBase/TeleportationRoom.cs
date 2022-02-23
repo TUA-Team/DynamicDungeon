@@ -12,8 +12,6 @@ namespace DynamicDungeon.DungeonBase
 	class TeleportationRoom : BaseRoom
 	{
 
-
-
 		internal TeleportationRoom(Chunk location) : base(location)
 		{
 			width = 15;
@@ -21,9 +19,9 @@ namespace DynamicDungeon.DungeonBase
 			roomBound = new Rectangle((int) location.Position.X, (int) location.Position.Y, width, height);
 		}
 
-		internal override Rectangle Generate()
-		{
-			for (int i = roomBound.X; i < roomBound.X + width; i++)
+        internal override Rectangle Generate()
+        {
+            for (int i = roomBound.X; i < roomBound.X + width; i++)
 			{
 				for (int j = roomBound.Y; j < roomBound.Y + height; j++)
 				{
@@ -35,5 +33,10 @@ namespace DynamicDungeon.DungeonBase
 
 			return roomBound;
 		}
-	}
+
+        internal override void Activate()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

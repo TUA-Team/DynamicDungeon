@@ -102,14 +102,14 @@ namespace DynamicDungeon.DungeonNPCs
 			
             if (firstButton && NPC.downedBoss3 && !DungeonWorld.DungeonSubworld.inDungeon)
             {
-				SLWorld.EnterSubworld("DynamicDungeon_DungeonSubworld");
+                Subworld.Enter<DungeonSubworld>();
             }
 
             var obj = typeof(Subworld).GetField("subworlds", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
 
             if (firstButton && DungeonWorld.DungeonSubworld.inDungeon)
             {
-				SLWorld.ExitSubworld();
+				Subworld.Exit();
             }
 
             base.OnChatButtonClicked(firstButton, ref shop);

@@ -21,14 +21,16 @@ namespace DynamicDungeon.DungeonBase
 
         internal override Rectangle Generate()
         {
-            Point vector = new Point(Main.maxTilesX / 2, Main.maxTilesY / 2);
+            Point vector = new Point((int)chunk.Position.X, (int)chunk.Position.Y);
             Point topleft = ModContent.GetInstance<InfinityCoreWorld>()[vector.X, vector.Y].Position.ToPoint();
+            DynamicDungeon.instance.Logger.Debug(topleft);
 
             for (int x = topleft.X + 3; x < topleft.X + 97; x++)
             {
                 for (int y = topleft.Y + 3; y < topleft.Y + 73; y++)
                 {
                     Main.tile[x, y].active(false);
+                    Main.tile[x, y].wall = WallID.BlueDungeon;
                 }
             }
 
@@ -43,14 +45,25 @@ namespace DynamicDungeon.DungeonBase
                 Main.tile[x, topleft.Y + 34].type = TileID.BlueDungeonBrick;
             }
 
-            NPC.NewNPC((topleft.X + 37) * 16 - 50, (topleft.Y + 32) * 16 - 132, DynamicDungeon.infinityCore.NPCType("DungeonCrystal"));
+            NPC.NewNPC((topleft.X + 37) * 16, (topleft.Y + 32) * 16, DynamicDungeon.infinityCore.NPCType("DungeonCrystal"));
 
-            Main.spawnTileX = topleft.X + 50;
-            Main.spawnTileY = topleft.Y + 30;
+            Main.spawnTileX = (topleft.X + 37);
+            Main.spawnTileY = (topleft.Y + 32);
+
+            var entity = new DungeonEntity.DungeonEntity();
+            entity.x = (topleft.X + 30) * 16;
+            entity.y = (topleft.Y + 30) * 16;
+            
+            DynamicDungeon.instance.Logger.Debug($"New player spawn point : ({Main.spawnTileX} , {Main.spawnTileY})");
 
             DungeonSubworld.inDungeon = true;
 
-            return new Rectangle(topleft.X, topleft.Y, 75, 75);
+            return new Rectangle(topleft.X, topleft.Y, 100, 75);
+        }
+
+        internal override void Activate()
+        {
+            throw new NotImplementedException();
         }
     }
 }

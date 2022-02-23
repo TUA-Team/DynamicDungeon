@@ -33,7 +33,6 @@ namespace DynamicDungeon.DungeonChunk
             progress.Message = "Currently generating dungeon room";
             if (dungeonRoom != null)
             {
-                
                 dungeonRoom.Generate();
             }
         }

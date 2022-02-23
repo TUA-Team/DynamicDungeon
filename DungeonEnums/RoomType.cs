@@ -6,51 +6,52 @@ using System.Threading.Tasks;
 
 namespace DynamicDungeon.DungeonEnums
 {
-	enum RoomType
+	enum RoomType : int
 	{
+		noRoom = -1,
 		/// <summary>
 		/// Room where the player spawn in
 		/// </summary>
-		StartingRoom,
+		StartingRoom = 0,
 		/// <summary>
 		/// Room where the dungeon crystal spawn, allow you to leave the dungeon or continue.
 		/// </summary>
-		TeleportationRoom,
+		TeleportationRoom = 1,
 		/// <summary>
 		/// Room that is guaranteed to appear past floor 2
 		/// </summary>
-		RewardRoom,
+		RewardRoom = 2,
 		/// <summary>
 		/// Harder room where you have to clear wave of mob to complete it
 		/// </summary>
-		InvasionRoom,
+		InvasionRoom = 3,
 		/// <summary>
 		/// Transition room between room
 		/// </summary>
-		HallRoom,
+		HallRoom = 4,
 		/// <summary>
 		///  Transition room between room ,but with actual challenge in it
 		/// </summary>
-		corridor,
+		corridor = 5,
 		/// <summary>
 		/// Room that is trap with flamethrower, spike, poison trap, grenade launcher trap and more new trap
 		/// </summary>
-		trapRoom,
+		trapRoom = 6,
 		/// <summary>
 		/// Room normally located before the teleportation room, a tough boss await...
 		/// </summary>
-		BossRoom,
+		BossRoom = 7,
 		/// <summary>
 		/// Room that can be unlocked under certain condition
 		/// </summary>
-		SecretRoom,
+		SecretRoom = 8,
 		/// <summary>
 		/// Basic room, I guess
 		/// </summary>
-		BasicRoom,
+		BasicRoom = 9,
 		/// <summary>
 		/// Dev room, only for testing
 		/// </summary>
-		TestRoom
+		TestRoom = 10
 	}
 }
